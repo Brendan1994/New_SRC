@@ -59,7 +59,7 @@ urls = ["https://swindon-rc.co.uk/?page_id=240","https://swindon-rc.co.uk/?page_
 
 
 #Variables for Excel data import
-df_excel = pd.read_excel("C:/Users/J10279/OneDrive - St. James's Place/Desktop/Python/Python/Practice/SRC/2025/TT results 2015 - 2022.xlsx", header=None)
+df_excel = pd.read_excel("TT results 2015 - 2022.xlsx", header=None)
 
 df_excel.columns = ['Position','Start Number','Name','Club','Split Time','Time','Comments']
 
