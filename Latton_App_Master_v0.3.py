@@ -260,7 +260,7 @@ with DataTab:
         rslt_df = df
 
     rslt_df1 = rslt_df.loc[:,rslt_df.columns != 'Start Time']
-    st.dataframe(rslt_df,hide_index=True)
+    st.dataframe(rslt_df1,hide_index=True)
 
 plot_df = rslt_df.iloc[::-1]
 plot_df['Date'] = pd.to_datetime(plot_df['Date'], format='%d %B %Y')
