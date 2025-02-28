@@ -1,9 +1,0 @@
-requests
-pandas
-BeautifulSoup
-re
-streamlit
-datetime, timedelta, time
-datetime
-numpy
-plotly.express
