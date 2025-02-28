@@ -1,3 +1,9 @@
-beautifulsoup4
-plotly.express
-openpyxl
+import requests
+import pandas as pd
+from bs4 import BeautifulSoup
+import re
+import streamlit as st
+from datetime import datetime as t, timedelta as td, time
+import datetime as dt
+import numpy as np
+import plotly.express as px
