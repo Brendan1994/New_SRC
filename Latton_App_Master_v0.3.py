@@ -226,35 +226,7 @@ df['Start Number'] = df['Start Number'].apply(lambda x: 0 if pd.isna(x) else x)
 
 df['Add Time']=df['Start Number'].apply(lambda x: td(minutes=(x-1)))
 df['Start Time']=df['Add Time'].apply(lambda delta: add_time(StartTime, delta))
-
-#df['Hours']=df['Add Time']//60
-#df['Minutes']=df['Add Time']%60
-#df['Add Time']=df.apply(lambda row: td(hours=row['Hours'],minutes=row['Minutes']),axis=1)
-#df['Start Time']=StartTime+df['Add Time']
 df.drop(columns=['Add Time'], inplace=True)
-
-#(hours=18,minutes=16,seconds=0)
-#for i in df['Start Number']:
-#    try:
-#        add_time = i-1
-        #add_mins = str(add_mins)
-#        H = int(add_time//60)
-#        M = int(add_time%60)
-#        add_time = td(hours=H,minutes=M,seconds=0)
-        #date.strptime(add_mins,"%H:%M:%S")
-
-#        df['Start Time']=StartTime+add_time
-        #td(hours=0, minutes=add_mins)
-#        if i == '1':
-#            df['Start Time'] = StartTime
-#        else:
-#            df['Start Time'] = StartTime + td(minutes=i-1)
-        #df['Start Time'] = df['Start Time'].dt.strftime('%H:%M:%S')
-#    except:
-#        continue
-#df['Start Time'] = df['Start Time'].dt.strftime('%H:%M:%S')
-#pd.to_datetime(df['Start Time']).dt.strftime('%H:%M:%S')
-#,format='%H:%M')
 
 df.columns = ['Position', 'Start Number', 'Name', 'Club', 'Split Time', 'Time','Speed m.p.h','Road Bike','Date','Comments','Start Time']
 
@@ -272,58 +244,6 @@ Sorted_Date = Date.iloc[pd.to_datetime(Date, format='%d %B %Y').argsort()[::-1]]
 Date = st.multiselect("Enter date to filter the results",list(Date))
 Racer = st.multiselect("Enter your name to filter the results",list(Names))
 
-
-
-
-#Initialise session states
-#if 'selected_racer' not in st.session_state:
-#    st.session_state.Racer = []
-
-#if 'selected_date' not in st.session_state:
-#    st.session_state.Date = []
-
-#try:
-#    with open('selected_dates.txt', 'r') as file:
-#        selected_dates = str(file.read())
-#        if selected_dates == []:
-#            st.session_state.Racer = Names
-#            st.write('NOOOOO')
-#        else:
-#            #Multiselect for racer
-#            st.write(st.session_state.Date)
-#            #st.write(st.session_state.Racer)
-#            filtered_racers = Names if not st.session_state.Date else [Racer for Date, Racer in zip(df['Date'],df['Name']) if Date in st.session_state.Date]
-#            selected_racers = st.multiselect("Enter your name to filter the results",options=filtered_racers,default=st.session_state.Racer)#list(Names)
-
-#            #Update racer session state
-#            st.session_state.Racer = selected_racers
-#not
-#            #Filter dates based on selected racer
-#            filtered_dates = Sorted_Date if selected_racers == [] else [Date for Date, Racer in zip(df['Date'],df['Name']) if Racer in selected_racers]
-            #Multiselect for date
-#            selected_dates = st.multiselect("Enter date to filter the results",options=filtered_dates,default=st.session_state.Date)
-
-#            st.session_state.Date = selected_dates
-#            st.write(st.session_state.Date)
-#    with open('selected_dates.txt', 'w') as file:
-#        file.write(str(selected_dates))
-#except FileNotFoundError:
-#    selected_dates = []
-
-
-#if selected_racers:
-    #filtered_dates = [Date for Date, Racer in zip(list(Sorted_Date),list(Names)) if Racer in list(Names)]
-#    filtered_dates = [Date for Date, Racer in zip(df['Date'],df['Name']) if Racer in selected_racers]
-#else:
-#    filtered_dates = list(Sorted_Date)
-
-
-#st.write(st.session_state.Date)
-#Filter racers based on selected dates
-#if selected_dates:
-#    filtered_racers = [Racer for Date, Racer in zip(df['Date'],df['Name']) if Date in selected_dates]
-#else:
-#    filtered_racers = Names
 
 
 DataTab, GraphTab = st.tabs(["Data","Graphs"])
@@ -345,27 +265,18 @@ with DataTab:
 plot_df = rslt_df.iloc[::-1]
 plot_df['Date'] = pd.to_datetime(plot_df['Date'], format='%d %B %Y')
 
-#fig_by_Speed = px.scatter(plot_df, x="Date", y="Speed m.p.h", color="Name")
 fig_by_Speed = px.line(plot_df, x="Date", y="Speed m.p.h", color="Name")
 fig_by_Speed.update_traces(hovertemplate='%{x|%d-%b-%Y}<br>Speed: %{y}')
 fig_by_Speed.update_traces(customdata=plot_df[['Date']])
 
-#fig_by_Position = px.scatter(plot_df, x="Date", y="Position", color="Name")
 fig_by_Position = px.line(plot_df, x="Date", y="Position", color="Name")
 fig_by_Position.update_layout(yaxis = dict(autorange="reversed"))
 fig_by_Position.update_traces(hovertemplate='%{x|%d-%b-%Y}<br>Position: %{y}')
 fig_by_Position.update_traces(customdata=plot_df[['Date']])
 
-#fig_by_Time = px.scatter(plot_df, x="Date", y=["Time","Split Time"], color="Name")
-#fig_by_Time = px.line(plot_df, x="Date", y=Time, color="Name")
-#fig_by_Time.update_yaxes(categoryorder="category descending")
-#fig_by_Time.update_traces(hovertemplate='%{x|%d-%b-%Y}<br>Time: %{y}')
-#fig_by_Time.update_traces(customdata=plot_df[['Date']])
 
 fig_by_Start = px.scatter(plot_df, x="Start Number", y="Time", color="Name")
 fig_by_Start.update_yaxes(categoryorder="category descending")
-#fig_by_Start.update_traces(hovertemplate='%{x|%d-%b-%Y}<br>Time: %{y}')
-#fig_by_Start.update_traces(customdata=plot_df[['Date']])
 
 with GraphTab:
     if not Racer:
