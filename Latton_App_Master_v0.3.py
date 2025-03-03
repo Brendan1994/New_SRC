@@ -262,37 +262,37 @@ with DataTab:
     rslt_df1 = rslt_df.loc[:,rslt_df.columns != 'Start Time']
     st.dataframe(rslt_df1,hide_index=True)
 
-plot_df = rslt_df.iloc[::-1]
-plot_df['Date'] = pd.to_datetime(plot_df['Date'], format='%d %B %Y')
+#plot_df = rslt_df.iloc[::-1]
+#plot_df['Date'] = pd.to_datetime(plot_df['Date'], format='%d %B %Y')
 
-fig_by_Speed = px.line(plot_df, x="Date", y="Speed m.p.h", color="Name")
-fig_by_Speed.update_traces(hovertemplate='%{x|%d-%b-%Y}<br>Speed: %{y}')
-fig_by_Speed.update_traces(customdata=plot_df[['Date']])
+#fig_by_Speed = px.line(plot_df, x="Date", y="Speed m.p.h", color="Name")
+#fig_by_Speed.update_traces(hovertemplate='%{x|%d-%b-%Y}<br>Speed: %{y}')
+#fig_by_Speed.update_traces(customdata=plot_df[['Date']])
 
-fig_by_Position = px.line(plot_df, x="Date", y="Position", color="Name")
-fig_by_Position.update_layout(yaxis = dict(autorange="reversed"))
-fig_by_Position.update_traces(hovertemplate='%{x|%d-%b-%Y}<br>Position: %{y}')
-fig_by_Position.update_traces(customdata=plot_df[['Date']])
+#fig_by_Position = px.line(plot_df, x="Date", y="Position", color="Name")
+#fig_by_Position.update_layout(yaxis = dict(autorange="reversed"))
+#fig_by_Position.update_traces(hovertemplate='%{x|%d-%b-%Y}<br>Position: %{y}')
+#fig_by_Position.update_traces(customdata=plot_df[['Date']])
 
 
-fig_by_Start = px.scatter(plot_df, x="Start Number", y="Time", color="Name")
-fig_by_Start.update_yaxes(categoryorder="category descending")
+#fig_by_Start = px.scatter(plot_df, x="Start Number", y="Time", color="Name")
+#fig_by_Start.update_yaxes(categoryorder="category descending")
 
-with GraphTab:
-    if not Racer:
-        st.write("Please select a racer from the name filter above to present graphs")
-    else:
-        SpeedTab, PositionTab, TimeTab, StartTab = st.tabs(["Speed", "Position", "Time", "Start Time"])
-        with SpeedTab:
-            st.write(fig_by_Speed)
-        with PositionTab:
-            st.write(fig_by_Position)
-        with TimeTab:
-            Time = st.selectbox("Split Time or Full Time",('Split Time','Time'))
-            fig_by_Time = px.line(plot_df, x="Date", y=Time, color="Name")
-            fig_by_Time.update_yaxes(categoryorder="category descending")
-            fig_by_Time.update_traces(hovertemplate='%{x|%d-%b-%Y}<br>Time: %{y}')
-            fig_by_Time.update_traces(customdata=plot_df[['Date']])
-            st.write(fig_by_Time)
-        with StartTab:
-            st.write(fig_by_Start)
+#with GraphTab:
+#    if not Racer:
+#        st.write("Please select a racer from the name filter above to present graphs")
+#    else:
+#        SpeedTab, PositionTab, TimeTab, StartTab = st.tabs(["Speed", "Position", "Time", "Start Time"])
+#        with SpeedTab:
+#            st.write(fig_by_Speed)
+#        with PositionTab:
+#            st.write(fig_by_Position)
+#        with TimeTab:
+#            Time = st.selectbox("Split Time or Full Time",('Split Time','Time'))
+#            fig_by_Time = px.line(plot_df, x="Date", y=Time, color="Name")
+#            fig_by_Time.update_yaxes(categoryorder="category descending")
+#            fig_by_Time.update_traces(hovertemplate='%{x|%d-%b-%Y}<br>Time: %{y}')
+#            fig_by_Time.update_traces(customdata=plot_df[['Date']])
+#            st.write(fig_by_Time)
+#        with StartTab:
+#            st.write(fig_by_Start)
