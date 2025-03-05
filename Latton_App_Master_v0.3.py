@@ -262,8 +262,8 @@ with DataTab:
     rslt_df1 = rslt_df.loc[:,rslt_df.columns != 'Start Time']
     st.dataframe(rslt_df1,hide_index=True)
 
-#plot_df = rslt_df.iloc[::-1]
-#plot_df['Date'] = pd.to_datetime(plot_df['Date'], format='%d %B %Y')
+plot_df = rslt_df.iloc[::-1]
+plot_df['Date'] = pd.to_datetime(plot_df['Date'], format='%d %B %Y')
 
 #fig_by_Speed = px.line(plot_df, x="Date", y="Speed m.p.h", color="Name")
 #fig_by_Speed.update_traces(hovertemplate='%{x|%d-%b-%Y}<br>Speed: %{y}')
@@ -279,9 +279,17 @@ with DataTab:
 #fig_by_Start.update_yaxes(categoryorder="category descending")
 
 #with GraphTab:
-#    if not Racer:
-#        st.write("Please select a racer from the name filter above to present graphs")
-#    else:
+    Select = st.selectbox("Choose which graph you would like to view",('Split Time','Time','Speed m.p.h','Position'))
+    if not Racer:
+        st.write("Please select a racer from the name filter above to present graphs")
+    else:
+        if Select=="Position":
+            fig_All = px.line(plot_df, x="Date", y="Position", color="Name")
+            fig_All.update_yaxes(categoryorder="category descending")
+            st.plotly_chart(fig_All)
+        else:
+            fig_All = px.line(plot_df, x="Date", y=Select, color="Name")
+            st.plotly_chart(fig_All)
 #        SpeedTab, PositionTab, TimeTab, StartTab = st.tabs(["Speed", "Position", "Time", "Start Time"])
 #        with SpeedTab:
 #            st.write(fig_by_Speed)
