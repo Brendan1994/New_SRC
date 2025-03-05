@@ -278,7 +278,7 @@ plot_df['Date'] = pd.to_datetime(plot_df['Date'], format='%d %B %Y')
 #fig_by_Start = px.scatter(plot_df, x="Start Number", y="Time", color="Name")
 #fig_by_Start.update_yaxes(categoryorder="category descending")
 
-#with GraphTab:
+with GraphTab:
     Select = st.selectbox("Choose which graph you would like to view",('Split Time','Time','Speed m.p.h','Position'))
     if not Racer:
         st.write("Please select a racer from the name filter above to present graphs")
