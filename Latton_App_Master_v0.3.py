@@ -283,8 +283,12 @@ with GraphTab:
     if not Racer:
         st.write("Please select a racer from the name filter above to present graphs")
     else:
-        if Select=="Position":
-            fig_All = px.line(plot_df, x="Date", y="Position", color="Name")
+        #if Select=="Position":
+        #    fig_All = px.line(plot_df, x="Date", y="Position", color="Name")
+        #    fig_All.update_yaxes(categoryorder="category descending")
+        #    st.plotly_chart(fig_All)
+        if Select == 'Start Time':
+            fig_All = px.scatter(plot_df, x="Start Number", y="Time", color="Name")
             fig_All.update_yaxes(categoryorder="category descending")
             st.plotly_chart(fig_All)
         else:
