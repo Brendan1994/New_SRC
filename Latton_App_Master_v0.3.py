@@ -55,7 +55,7 @@ def add_time(start_time, delta):
 
 
 #Variables for HTML requests
-urls = ["https://swindon-rc.co.uk/?page_id=240","https://swindon-rc.co.uk/?page_id=590"]
+urls = ["https://swindon-rc.co.uk/?page_id=240","https://swindon-rc.co.uk/?page_id=590","https://swindon-rc.co.uk/?page_id=879"]
 
 
 #Variables for Excel data import
